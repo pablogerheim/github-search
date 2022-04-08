@@ -22,6 +22,8 @@ function user({ avatar_url, twitter_username, followers, following, email, bio, 
   email = email === null ? "Email não encontrado" : email
   bio = bio === null ? "Bio não encontrada" : bio
 
+
+
   let user = `<div class="user">
   <img class="user-image" src="${avatar_url}">
   <h2 class="user-name">${name}</h2>
@@ -54,17 +56,21 @@ function user({ avatar_url, twitter_username, followers, following, email, bio, 
 }
 
 function print(conteudo = "Não Encontrado") {
-  let userInfo = document.createElement('div')
-  userInfo.classList.add("conteudo")
-  userInfo.setAttribute("id", "keyremove")
-  userInfo.innerHTML = conteudo
-  document.getElementById('mainuser').appendChild(userInfo)
+  if (conteudo === "Não Encontrado"){
+    let userInfo = document.createElement('div')
+    userInfo.classList.add("notfund")
+    userInfo.setAttribute("id", "keynotfund")
+    userInfo.innerHTML = conteudo
+    document.getElementById('mainuser').appendChild(userInfo)
+  }
+  document.getElementsByClassName('conteudo').setAttribute("id", "keyprint")
 }
 
 document.getElementById('name_of_user').addEventListener('change', async function (evt) {
 
   if (document.getElementsByClassName('conteudo').length == 1) {
-    document.getElementById('keyremove').remove()
+    document.getElementById('keynotfund').remove()
+    document.getElementById('keyremove').setAttribute("id", "keyremove")
   }
 
   const { userObj, reposArry } = await api(evt.target.value)

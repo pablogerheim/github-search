@@ -23,8 +23,32 @@
         <input type="input" class="form__field" placeholder="Name" name="name" id='name_of_user' required />
         <label for="name" class="form__label"></label>
     </div>
-    <main id="mainuser"></main>
+    <main id="mainuser">
+        <div class="conteudo" id="keyremove">
+            <div class="user">
+                <img class="user-image" src="${avatar_url}">
+                <h2 class="user-name">${name}</h2>
+                <div class="user-follows">
+                    <label class="user-followers">Followers: ${followers}</label>
+                    <label class="user-followings">Followings: ${following}</label>
+                </div>
+                <div class="user-info">
+                    <p class="user-email"><i class="envelope"></i>${email}</p>
+                    <p class="user-bio"><i class="user-icon far fa-user"></i>${bio}</p>
+                </div>
+            </div>
+            <div class="repos">
+                <div class="repos-title">
+                    <h1 class='title-cell'>Repositorio</h1>
+                    <h1 class='title-cell'>Link direto</h1>
+                </div>
+                <div class="repos-cells">
+                    ${reposArry.map((item) => lineTable(item)).join('')}
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 <script src="../js/index.js"></script>
-</html>
 
+</html>
