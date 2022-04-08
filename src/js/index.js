@@ -8,12 +8,12 @@ async function api(value) {
   return ({ userObj, reposArry })
 }
 
-function linhaTabela(item) {
+function lineTable({ name, full_name, }) {
 
   return `
   <div class= 'table-conteiner'>
-  <p class='table-cell-name' >${item.name}</p>
-  <button class='table-cell-button' id ="123" value = ${item.full_name} ><a class="table-cell-a" href="repository.html?user=${item.full_name}"> Ver detalhes</a> </button>
+  <p class='table-cell-name' >${name}</p>
+  <button class='table-cell-button' id ="123" value = ${full_name} ><a class="table-cell-a" href="repository.html?user=${full_name}"> Ver detalhes</a> </button>
   </div>`
 }
 
@@ -22,9 +22,7 @@ function user({ avatar_url, twitter_username, followers, following, email, bio, 
   email = email === null ? "Email não encontrado" : email
   bio = bio === null ? "Bio não encontrada" : bio
 
-  let userInfo = document.createElement('div')
-  userInfo.classList.add("conteudo")
-  let conteudo = `<div class="user">
+  let user = `<div class="user">
   <img class="user-image" src="${avatar_url}">
   <h2 class="user-name">${name}</h2>
   <div class="user-follows">
@@ -36,30 +34,42 @@ function user({ avatar_url, twitter_username, followers, following, email, bio, 
     <p class="user-bio"><i class="user-icon far fa-user"></i>${bio}</p>
   </div>
   </div>
+  `
+  let repos = `
   <div class="repos">
   <div class="repos-title">
   <h1 class='title-cell' >Repositorio</h1>
   <h1 class='title-cell' >Link direto</h1>
   </div>
   <div class ="repos-cells">
-  ${reposArry.map((item) => linhaTabela(item)).join('')}            
+  ${reposArry.map((item) => lineTable(item)).join('')}            
   </div>
   </div>`
 
+  let norepos = ` <div class="repos"><h2> ${name} não possui repositorios publicos </h2></div>`
+
+  let content = reposArry.length === 0 ? `${user}${norepos}` : `${user}${repos}`
+
+  print(content)
+}
+
+function print(conteudo = "Não Encontrado") {
+  let userInfo = document.createElement('div')
+  userInfo.classList.add("conteudo")
+  userInfo.setAttribute("id", "keyremove")
   userInfo.innerHTML = conteudo
   document.getElementById('mainuser').appendChild(userInfo)
 }
 
 document.getElementById('name_of_user').addEventListener('change', async function (evt) {
-  evt.preventDefault()
-
-  console.log(document.getElementsByClassName('conteudo').length)
 
   if (document.getElementsByClassName('conteudo').length == 1) {
-    document.getElementById('mainuser').removeChild(document.getElementById('mainuser').firstChild)
+    document.getElementById('keyremove').remove()
   }
 
   const { userObj, reposArry } = await api(evt.target.value)
-  user(userObj, reposArry)
+
+  if (userObj.message != undefined) { print() }
+  else user(userObj, reposArry)
 })
 

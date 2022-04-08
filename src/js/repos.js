@@ -2,15 +2,7 @@
 const urlParams = new URLSearchParams(window.location.search)
 const userFname = urlParams.get("user");
 
-async function repository(userFname) {
-  let reposDetail = await api2(userFname)
-  repo(reposDetail)
-}
-
-async function api2(full_name) {
-  reposDetail = await fetch(`https://api.github.com/repos/${full_name}`).then(resp => resp.json())
-  return reposDetail
-}
+async function repository(userFname) {repo(await fetch(`https://api.github.com/repos/${userFname}`).then(resp => resp.json()))}
 
 function repo({ owner: { avatar_url, login }, name, description, stargazers_count, forks, html_url, language }) {
   description = description === null ? "Descrição não encontrada" : description
