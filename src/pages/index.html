@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap" rel="stylesheet">
-    <link href="https://www.flaticon.com/br/icone-gratis/gmail_732200?related_id=732200" rel="stylesheet">
+
 
     <title>GitHub User Search</title>
     <link rel="stylesheet" href="../css/reset.css">
@@ -26,25 +25,16 @@
     <main id="mainuser">
         <div class="conteudo" id="keyremove">
             <div class="user">
-                <img class="user-image" src="${avatar_url}">
-                <h2 class="user-name">${name}</h2>
-                <div class="user-follows">
-                    <label class="user-followers">Followers: ${followers}</label>
-                    <label class="user-followings">Followings: ${following}</label>
-                </div>
-                <div class="user-info">
-                    <p class="user-email"><i class="envelope"></i>${email}</p>
-                    <p class="user-bio"><i class="user-icon far fa-user"></i>${bio}</p>
-                </div>
+                <div id="userid"></div>
+                <div class="user-follows" id="followsid"></div>
+                <div class="user-info" id="infoid"></div>
             </div>
-            <div class="repos">
+            <div class="repos" id="cellsid">
                 <div class="repos-title">
-                    <h1 class='title-cell'>Repositorio</h1>
-                    <h1 class='title-cell'>Link direto</h1>
+                    <h2 class='title-cell'>Repositorio</h2>
+                    <h2 class='title-cell'>Link direto</h2>
                 </div>
-                <div class="repos-cells">
-                    ${reposArry.map((item) => lineTable(item)).join('')}
-                </div>
+
             </div>
         </div>
     </main>

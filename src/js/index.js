@@ -1,4 +1,4 @@
-let userDetail = ""
+let userDetail = ''
 
 async function api(value) {
 
@@ -13,69 +13,63 @@ function lineTable({ name, full_name, }) {
   return `
   <div class= 'table-conteiner'>
   <p class='table-cell-name' >${name}</p>
-  <button class='table-cell-button' id ="123" value = ${full_name} ><a class="table-cell-a" href="repository.html?user=${full_name}"> Ver detalhes</a> </button>
+  <button class='table-cell-button' id ='123' value = ${full_name} ><a class='table-cell-a' href='repository.html?user=${full_name}'> Ver detalhes</a> </button>
   </div>`
 }
 
 function user({ avatar_url, twitter_username, followers, following, email, bio, login }, reposArry) {
   let name = twitter_username === null ? login : twitter_username
-  email = email === null ? "Email não encontrado" : email
-  bio = bio === null ? "Bio não encontrada" : bio
+  email = email === null ? 'Email não encontrado' : email
+  bio = bio === null ? 'Bio não encontrada' : bio
 
+  print('', 'img', 'userid', 'id', 'imgid', 'user-image', 'src', avatar_url)
+  print(name, 'h2', 'userid', 'id', 'nameid', 'user-name')
+  print(followers, 'label', "followsid", 'id', 'followersid', 'user-followers')
+  print(following, 'label', "followsid", 'id', 'followingsid', 'user-followings')
+  print(email, 'p', 'infoid', 'id', 'emailid', 'user-email')
+  print(bio, 'p', 'infoid', 'id', 'bioid', 'user-bio')
 
+  let repos = reposArry.map((item) => lineTable(item)).join('')
 
-  let user = `<div class="user">
-  <img class="user-image" src="${avatar_url}">
-  <h2 class="user-name">${name}</h2>
-  <div class="user-follows">
-    <label class="user-followers">Followers: ${followers}</label>
-    <label class="user-followings">Followings: ${following}</label>
-  </div>
-  <div class="user-info">
-    <p class="user-email"><i class="envelope"></i>${email}</p>
-    <p class="user-bio"><i class="user-icon far fa-user"></i>${bio}</p>
-  </div>
-  </div>
-  `
-  let repos = `
-  <div class="repos">
-  <div class="repos-title">
-  <h1 class='title-cell' >Repositorio</h1>
-  <h1 class='title-cell' >Link direto</h1>
-  </div>
-  <div class ="repos-cells">
-  ${reposArry.map((item) => lineTable(item)).join('')}            
-  </div>
-  </div>`
+  let norepos = `<div class="repos"><h2> ${name} não possui repositorios publicos </h2></div>`
 
-  let norepos = ` <div class="repos"><h2> ${name} não possui repositorios publicos </h2></div>`
+  let content = reposArry.length === 0 ? norepos : repos
 
-  let content = reposArry.length === 0 ? `${user}${norepos}` : `${user}${repos}`
+  print(content, "div", 'cellsid', 'id', 'cellid', "repos-cells")
 
-  print(content)
+  document.getElementById('keyremove').setAttribute('id', 'keyprint')
 }
 
-function print(conteudo = "Não Encontrado") {
-  if (conteudo === "Não Encontrado"){
-    let userInfo = document.createElement('div')
-    userInfo.classList.add("notfund")
-    userInfo.setAttribute("id", "keynotfund")
-    userInfo.innerHTML = conteudo
-    document.getElementById('mainuser').appendChild(userInfo)
+function print(conteudo, element, getid, id, value, classN, id2, value2) {
+  let userInfo = document.createElement(element)
+  userInfo.classList.add(classN)
+  userInfo.setAttribute(id, value)
+  userInfo.setAttribute(id2, value2)
+  userInfo.innerHTML = conteudo
+  document.getElementById(getid).appendChild(userInfo)
+
+
+  if (document.getElementById('keyprint') != undefined) {
+    document.getElementById('keyprint').setAttribute('id', 'keyremove')
   }
-  document.getElementsByClassName('conteudo').setAttribute("id", "keyprint")
 }
 
 document.getElementById('name_of_user').addEventListener('change', async function (evt) {
 
-  if (document.getElementsByClassName('conteudo').length == 1) {
-    document.getElementById('keynotfund').remove()
-    document.getElementById('keyremove').setAttribute("id", "keyremove")
+  if (document.getElementsByClassName('user-image') != null && document.getElementById('keyprint') != null) {
+    document.getElementById('imgid').remove()
+    document.getElementById('nameid').remove()
+    document.getElementById('followersid').remove()
+    document.getElementById('followingsid').remove()
+    document.getElementById('emailid').remove()
+    document.getElementById('bioid').remove()
+    document.getElementById('cellid').remove()
+    document.getElementById('keyprint').setAttribute('id', 'keyremove')
   }
-
-  const { userObj, reposArry } = await api(evt.target.value)
-
-  if (userObj.message != undefined) { print() }
-  else user(userObj, reposArry)
+  if (evt.target.value === "" ) {document.getElementById('notfund') != undefined? document.getElementById('notfund').remove():'' } else {
+    const { userObj, reposArry } = await api(evt.target.value)
+    if (userObj.message == undefined && document.getElementById('notfund') != undefined) { document.getElementById('notfund').remove() }
+    if (userObj.message != undefined) { print('Não Encontrado', 'div', 'mainuser', 'id', 'notfund') }
+    else user(userObj, reposArry)
+  }
 })
-
