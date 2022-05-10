@@ -1,5 +1,3 @@
-let userDetail = ''
-
 async function api(value) {
 
   let userObj = await fetch(`https://api.github.com/users/${value}`).then(resp => resp.json())
