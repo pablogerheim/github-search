@@ -16,7 +16,27 @@
     <header class="toolbar">
         <h1 class="title">GitHub User Search</h1>
     </header>
-    <main id="mainrepo"></main>
+    <main id="mainrepo">
+        <div class="repo-details">
+            <div class="repo-owner">
+                <img class="repo-owner-image" id="img">
+                <h3 class="repo-owner-name" id="login"></h3>
+            </div>
+            <div class="repo-info">
+                <h2 class="repo-name" id="name"></h2>
+                <p class="repo-description" id="description"></p>
+                <div class="repo-other-infos">
+                    <p id="language"></p>
+                    <div class="repo-star-and-link">
+                        <p id="star"></p>
+                        <p id="forks"></p>
+                        <a id="github" target="_blank">Abrir no GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
-<script src="../js/repos.js"></script> 
+<script src="../js/repos.js"></script>
+
 </html>
