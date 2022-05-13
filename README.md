@@ -1,10 +1,9 @@
-<h1 align="center"> GitHub </h1>
+# GitHub 
 
-<h2 align="center"> Descrição </h2>
-<p> Objetivo deste projeto é a pratica, através de uma API com informações de usuários do GitHub é realizada uma interface de visualização com linkes para detalhes do repositório que por sua vez disponibilizam direcionamento para o próprio GitHub. <p/>
+## Descrição
+Através de uma API rest do GitHub que traz informações de usuários e repositórios foi criada uma interface de busca.
 
-<h2 align="center"> Funcionalidades e demonstração </h2>
-<p> Busca por nome tipo texto <p/>
+Essa busca é feita a partir do nome de usuário GitHub e mostra informações deste usuário e uma lista dos seus repositórios com um link para uma página de detalhes e um link direto para sua página específica no GithHub.
 
-<h2 align="center"> Tecnologias utilizadas </h2>
-<p> JS, CSS, HTML <p/>
+## Tecnologias utilizadas
+ JS, CSS, HTML 

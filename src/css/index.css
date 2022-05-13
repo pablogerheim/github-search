@@ -152,6 +152,11 @@
 .title-cell {
   font-size: 30px;
 }
+.select-cell{
+  font-size: 25px;
+  border-radius:10px;
+  padding:2.5px;
+}
 
 .table-cell-name {
   align-items: center;

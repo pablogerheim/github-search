@@ -1,9 +1,15 @@
+let username = ''
 async function api(userName) {
 
     let userObj = await fetch(`https://api.github.com/users/${userName}`).then(resp => resp.json())
-    let reposArry = await fetch(`https://api.github.com/users/${userName}/repos?sort=stars`).then(resp => resp.json())
+    let reposArry = await apiRepo(userName,"stars")
 
     return ({ userObj, reposArry })
+}
+
+async function apiRepo(userName, sort) {
+    let reposArry = await fetch(`https://api.github.com/users/${userName}/repos?sort=${sort}`).then(resp => resp.json())
+    return reposArry
 }
 
 function linhaTabela(item) {
@@ -32,25 +38,26 @@ function user({ avatar_url, twitter_username, followers, following, email, bio, 
 
 document.getElementById('name_of_user').addEventListener('change', async function(evt) {
     evt.preventDefault()
+    username = evt.target.value
 
-    if (document.getElementById('keyprint') != undefined) {
-        document.getElementById('keyprint').setAttribute('id', 'keyremove')
-    }
+   document.getElementById('keyprint')? document.getElementById('keyprint').setAttribute('id', 'keyremove') : ""
 
-    if (evt.target.value === "") { document.getElementById('notfund') != undefined ? document.getElementById('notfund').remove() : '' } else {
+    if (evt.target.value === "") { document.getElementById('notfund')? document.getElementById('notfund').remove() : '' } else {
         const { userObj, reposArry } = await api(evt.target.value)
-        console.log(userObj)
-        if (userObj.message == undefined && document.getElementById('notfund') != undefined) {
-            document.getElementById('notfund').remove()
-        }
-        if (document.getElementById('notfund') != undefined) {
-            document.getElementById('notfund').remove()
-        }
-        if (userObj.message != undefined) {
+
+      document.getElementById('notfund')? document.getElementById('notfund').remove():''
+
+         if (userObj.message) {
             let notfund = document.createElement("div")
             notfund.setAttribute("id", "notfund")
             notfund.innerHTML = "Não encontrado"
             document.getElementById("mainuser").appendChild(notfund)
         } else user(userObj, reposArry)
     }
+})
+
+document.getElementById('select-sort').addEventListener('change', async function(evt) {
+    evt.preventDefault()
+    let reposArry = await apiRepo(username, evt.target.value)
+    document.getElementById('cells').innerHTML = reposArry.map((item) => linhaTabela(item)).join('')
 })

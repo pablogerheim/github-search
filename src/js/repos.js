@@ -16,3 +16,8 @@ function repo({ owner: { avatar_url, login }, name, description, stargazers_coun
   document.getElementById("github").setAttribute("href", html_url)
 }
 repository(userFname)
+
+document.getElementById('go-back').addEventListener('click', (evt) => {
+  evt.preventDefault()
+  history.back();
+});

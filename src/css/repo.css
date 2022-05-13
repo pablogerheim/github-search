@@ -8,25 +8,37 @@
   width: 100%;
   font-size: 40px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   background: #dddbfe;
   font-family: inherit;
 }
 
+.button-back{
+  display: flex;
+  place-self: flex-start;
+  margin: 15px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border: none;
+  padding:5px;
+}
+
+.button-back:hover{
+  background-color: #d3d3d3;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3);
+  transition: 0, 5s;
+}
 .title {
   margin-top: 15px;
 }
 
 #mainrepo{
-width:100%
+width:90%;
+padding:5px;
 }
-.repo-details{
-  display: grid;
-  grid-template-columns: 30% 70%;
-  justify-content: space-around;
-  align-items: center;
-  padding: 50px;}
+
 
 .repo-owner{
   display: flex;
@@ -44,6 +56,7 @@ width:100%
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
+
   margin: 16px 0;
 }
 
@@ -62,19 +75,12 @@ width:100%
 
 }
 
-
 .repo-star-and-link{
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
 }
 
-.star-icon,
-.lang-icon,
-.fork-icon,
-.git-open-icon{
-  margin-right: 6px;
-}
 
 @media(min-width:576px){
   .repo-details{
