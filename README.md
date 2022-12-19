@@ -27,3 +27,4 @@ No caso de clonar do Github - Node.js - https://nodejs.org/en/
 * [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 * [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML) 
 * [GitHub](https://github.com/)
+* [Vercel](https://vercel.com) - Hospedagem
